@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Sistemak: Lab1 - Ataza01 - Pablo Ruiz & Laura Marquinez </title>
+
+        <style>
+            body
+            {
+                background-color: rgb(211, 211, 211);
+            }
+            h1
+            {
+                color: rgb(15, 15, 120);
+                text-align: center;
+            }
+            h3
+            {
+                text-align: center;
+            }
+            .recuadro
+            {
+                margin: 0 auto;
+                align-content: center;
+                border-radius: 30px;
+                border: 5px solid #666666;
+                width: 400px;
+                text-align: center;
+            }
+            form 
+            {
+                padding: 15px;
+            }
+            .center 
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 15px;
+            }
+        </style>
+
+    </head>
+    
+        
+    <body>
+        <div class = "recuadro">
+        <h1>KALKULAGAILUA <img src = "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x10000:format=png/path/sd67b1a043f6e96ce/image/i99d61d8fdea139b0/version/1477248800/producto-y-divisi%C3%B3n-de-n%C3%BAmeros-con-signo.png" width = "50" ></h1> 
+        <h3>Eragiketa bat egin eta egiaztatu erantzuna.</h3>
+        
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+
+        <script>
+        	$(document).ready(function()
+            {              	
+        
+                $.denakBeteta = function()
+                {
+                    if ( $('#ide1').val()!="" & $('#ide2').val()!="" & $('#erantzuna').val()!="" & $('#iderag').val()!="") 
+                    {
+                    console.log(111111);
+                        return true;
+                    } else 
+                    {
+                    console.log(111111);
+                        return false;
+                    }
+                }
+
+
+                $('#botoia').click(function()  
+                {
+                    if ($.denakBeteta()) 
+                    {
+                        var erantzunZuzena;
+                        var e1 = $('#ide1').val();
+                        var e2 = $('#ide2').val();
+                        var erantzuna = $('#erantzuna').val();
+                        var eragigaia = $('#iderag').val();
+
+                        if (eragigaia === "+")
+                        {
+                            erantzunZuzena = parseFloat(e1) + parseFloat(e2);
+                        } 
+                        else if (eragigaia === "-") 
+                        {
+                            erantzunZuzena = parseFloat(e1)-parseFloat(e2);
+                        } 
+                        else if (eragigaia === "*") 
+                        {
+                            erantzunZuzena = parseFloat(e1)*parseFloat(e2);
+                        } 
+                        else if (eragigaia =="/" && $('#ide2').val() == 0)
+                        {
+							console.log(111111111111);
+                            $('#OK').hide();
+                            $('#NOT').hide(); 
+                            $('#QUEST').hide();
+                            $('#EZEZAGUNA').show();
+                            alert("Ezin dezu zati 0 egin!");
+						
+						}else
+						{
+                            erantzunZuzena = parseFloat(parseFloat(e1)/parseFloat(e2));
+                        }
+                        if (erantzunZuzena.toString() === erantzuna.toString())
+                        {
+                            console.log(111111111111);
+                            $('#OK').show();
+                            $('#NOT').hide(); 
+                            $('#QUEST').hide();
+                            $('#EZEZAGUNA').hide();
+                            alert("Oso ondo asmatu duzu!");
+
+                        } 
+                        else 
+                        {
+                            console.log(22222222222);
+                            $('#OK').hide();
+                            $('#NOT').show(); 
+                            $('#QUEST').hide();
+                            $('#EZEZAGUNA').hide();
+                            alert("Ez duzu asmatu!");
+
+
+                        }  
+					}							
+                     else 
+                    {
+                        console.log(3333333333);
+                        $('#OK').hide();
+                        $('#NOT').hide(); 
+                        $('#QUEST').show();
+                        $('#EZEZAGUNA').hide();
+                        alert("Kontuz! Bi eragigai eta erantzuna idatzi behar duzu programa behar den bezala funtzionatzeko");
+                    }
+					})
+            
+			$('#borratu').click(function()
+			{
+						console.log(4444444444);
+                        $('#OK').hide();
+                        $('#NOT').hide(); 
+                        $('#QUEST').hide();
+                        $('#EZEZAGUNA').hide();
+						$('#form')[0].reset();
+			})
+            })
+        
+        
+        </script>
+		
+        <form>
+            Lehen eragigaia:<br> <input type="text" name="e1" id="ide1"><br>
+            <br>
+            Eragigaia:<br>
+            <select id="iderag" name="aukeratuEragigaia">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option></select><br>
+            <br>
+            Bigarren eragigaia: <br> <input type="text" name="e2" id="ide2"><br>
+            <br>
+            Espero duzun erantzuna:<br> <input type="text" name="erantz" id="erantzuna"><br>
+            <br>
+            <input id="botoia" type="button" value="Egiaztatu!" > <input id="borratu" type="reset" value="Borratu"><br><br>
+        </form>
+        </div>
+        
+        <img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/bai.png" id="OK" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/ez.png" id="NOT" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/gald.jpg" id="QUEST" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/excla.jpg" id="EZEZAGUNA" style="display: none;" width="150">
+    </body>
+</html>

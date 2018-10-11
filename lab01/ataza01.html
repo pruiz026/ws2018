@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Sistemak: Lab1 - Ataza01 - Pablo Ruiz & Laura Marquinez </title>
+
+        <style>
+        	body
+        	{
+            	background-color: rgb(211, 211, 211);
+        	}
+        	h1
+        	{
+        		color: rgb(15, 15, 120);
+				text-align: center;
+        	}
+			h3
+			{
+				text-align: center;
+			}
+			.recuadro
+			{
+				margin: 0 auto;
+				align-content: center;
+				border-radius: 30px;
+				border: 5px solid #666666;
+				width: 400px;
+				text-align: center;
+			}
+			form 
+			{
+				padding: 15px;
+			}
+			.center 
+			{
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 15px;
+			}
+        </style>
+
+    </head>
+    
+        
+    <body>
+		<div class = "recuadro">
+        <h1>KALKULAGAILUA <img src = "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x10000:format=png/path/sd67b1a043f6e96ce/image/i99d61d8fdea139b0/version/1477248800/producto-y-divisi%C3%B3n-de-n%C3%BAmeros-con-signo.png" width = "50" ></h1> 
+        <h3>Eragiketa bat egin eta egiaztatu erantzuna.</h3>
+		
+<script>
+        function denakBeteta() 
+        {
+            if (document.getElementById("ide1").value !=="" && document.getElementById("ide2").value !=="" && document.getElementById("erantzuna").value !== "") 
+            {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        function egiaztatu()
+         {
+            var irudiOK = document.getElementById("OK");
+            var irudiNOT = document.getElementById("NOT");
+            var irudiGALD = document.getElementById("QUEST");
+			var irudiEZEZAGUNA = document.getElementById("EZEZAGUNA")
+            
+            if (denakBeteta()) 
+            {
+                var erantzunZuzena;
+                var e1 = document.getElementById("ide1").value;
+                var e2 = document.getElementById("ide2").value;
+                var erantzuna = document.getElementById("erantzuna").value;
+                var eragigaia = document.getElementById("iderag").value;
+                
+                if (eragigaia === "+")
+                {
+                    erantzunZuzena = parseFloat(e1) + parseFloat(e2);
+                } else if (eragigaia === "-") 
+                {
+                    erantzunZuzena = parseFloat(e1)-parseFloat(e2);
+                } else if (eragigaia === "*") 
+                {
+                    erantzunZuzena = parseFloat(e1)*parseFloat(e2);
+                } else if(eragigaia =="/" && document.getElementById("ide2").value == 0)
+				{
+					irudiGALD.style.display = 'none';
+					irudiOK.style.display = 'none';
+					irudiNOT.style.display = 'none';
+					irudiEZEZAGUNA.style.display = 'block';
+					alert("ezin dezu zati 0 egin!");
+					return false;
+				}
+                else{
+                    erantzunZuzena = parseFloat(parseFloat(e1)/parseFloat(e2));
+                }
+                if (erantzunZuzena.toString() === erantzuna.toString())
+                {
+                    irudiOK.style.display = 'block';
+                    irudiNOT.style.display = 'none';
+                    irudiGALD.style.display = 'none';
+					irudiEZEZAGUNA.style.display = 'none';
+					alert("Oso ondo asmatu duzu!");
+                } else 
+                {
+                    irudiOK.style.display = 'none';
+                    irudiNOT.style.display = 'block';
+                    irudiGALD.style.display = 'none';
+					irudiEZEZAGUNA.style.display = 'none';
+					alert("Ez duzu asmatu!");
+                }
+                
+				} else 
+				{           
+					irudiGALD.style.display = 'block';
+					irudiOK.style.display = 'none';
+					irudiNOT.style.display = 'none';
+					irudiEZEZAGUNA.style.display = 'none';
+					alert("Kontuz! Bi eragigai eta erantzuna idatzi behar duzu programa behar den bezala funtzionatzeko");
+            }              
+        }
+		function borratu()
+		{
+            var irudiOK = document.getElementById("OK");
+            var irudiNOT = document.getElementById("NOT");
+            var irudiGALD = document.getElementById("QUEST");
+			var irudiEZEZAGUNA = document.getElementById("EZEZAGUNA")			
+			irudiGALD.style.display = 'none';
+			irudiOK.style.display = 'none';
+			irudiNOT.style.display = 'none';
+			irudiEZEZAGUNA.style.display = 'none';
+		}
+        </script>
+        
+        <form id="myform">	
+
+            Lehen eragigaia:<br> <input type="text" name="e1" id="ide1"><br>
+            <br>
+            Eragigaia:<br>
+            <select id="iderag" name="aukeratuEragigaia">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option></select><br>
+            <br>
+            Bigarren eragigaia: <br> <input type="text" name="e2" id="ide2"><br>
+            <br>
+            Espero duzun erantzuna:<br> <input type="text" name="erantz" id="erantzuna"><br>
+            <br>
+            <input type="button" value="Egiaztatu!" onclick="egiaztatu()"> <input type="button" value="Borratu" onclick="this.form.reset() ; borratu()"><br>
+		</form>
+		</div>
+		
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/bai.png" id="OK" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/ez.png" id="NOT" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/gald.jpg" id="QUEST" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/excla.jpg" id="EZEZAGUNA" style="display: none;" width="150">
+    </body>
+</html>

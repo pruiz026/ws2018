@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Web Sistemak: Lab1 - Ataza01 - Pablo Ruiz & Laura Marquinez </title>
+        
+        <style>
+
+            body
+            {
+                background-color: rgb(211, 211, 211);
+            }
+            h1
+            {
+                color: rgb(15, 15, 120);
+                text-align: center;
+            }
+            h3
+            {
+               text-align: center;
+            }
+            .recuadro
+            {
+                margin: 0 auto;
+                align-content: center;
+                border-radius: 30px;
+                border: 5px solid #666666;
+                width: 400px;
+                text-align: center;
+            }
+            form 
+            {
+               padding: 15px;
+            }
+            .center 
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 15px;
+            }
+
+
+            label 
+            {
+                display: inline-block;
+                float: center;
+                clear: center;
+                width: 250px;
+                text-align: center;
+            }
+
+            input 
+            {
+                display: inline-block;
+                float: center;
+            }
+
+        </style>
+		
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.4/math.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      
+        <script>
+            function denakBeteta() 
+            {
+                if ($('#zbki1').val() !== "" & $('#zbki3').val() !== "") 
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+
+            }
+
+            function kalkulatu() 
+            {
+                var emaitza=eval($('#zbki1').val());
+                inprimatu(emaitza);
+            }
+
+
+
+            function inprimatu(b) 
+            {
+                if (denakBeteta() === false) 
+                {
+                    
+                }
+                else 
+                {
+                    var correct = $("#correct");
+                    var incorrect = $('#incorrect');
+                    var c = $('#zbki3').val();
+                    if (b == c) 
+                    {
+                        $("#emaitza").text("ZUZENA!");
+						$('#OK').show();
+                        $('#NOT').hide();
+
+                    }
+                    else {
+                        $("#emaitza").text("OKERRA! Saiatu berriz...");
+						$('#OK').hide();
+                        $('#NOT').show();
+                    }
+                }
+            }
+			function borratu()
+			{	
+						console.log(4444444444);
+                        $('#OK').hide();
+                        $('#NOT').hide(); 
+						$("#emaitza").text("");
+			}
+        </script>
+    </head>
+
+    <body>
+        <div class = "recuadro">
+        <h1>KALKULAGAILUA <img src = "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x10000:format=png/path/sd67b1a043f6e96ce/image/i99d61d8fdea139b0/version/1477248800/producto-y-divisi%C3%B3n-de-n%C3%BAmeros-con-signo.png" width = "50" ></h1> 
+        <h3>Eragiketa bat egin eta egiaztatu erantzuna.</h3>
+
+        <form>
+            <label for="zbki1">Idatz ezazu eragiketa (adb: 4*5+1):</label>
+            <input type="text" name="zbki1" id="zbki1" onchange="kalkulatu();"/>
+            <br>
+			<br>
+            <label for="zbki3">Espero duzun erantzuna:</label>
+            <input type="text" name="zbki3" id="zbki3" onchange="kalkulatu();"/>
+			<br><br>
+			<input type="reset" value="Borratu" onclick="borratu()">
+        </form>
+            <p id="emaitza"></p>
+		</div>
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/bai.png" id="OK" style="display: none;" width="150">
+		<img class="center" src="https://wspruiz026.000webhostapp.com/argazkiak/ez.png" id="NOT" style="display: none;" width="150">
+
+    </body>
+</html>
