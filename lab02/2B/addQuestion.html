@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+        <head>
+
+            <meta name="eduki-mota" content="text/html;" http-equiv="content-type" charset="utf-8">
+            <title>Add question</title>
+            <link rel='stylesheet' type='text/css' href='styles/style.css' />
+            <link rel='stylesheet' 
+                   type='text/css' 
+                   media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+                   href='styles/wide.css' />
+            <link rel='stylesheet' 
+                   type='text/css' 
+                   media='only screen and (max-width: 480px)'
+                   href='styles/smartphone.css' />
+
+            <script src="js/jquery-3.2.1.js"></script>
+
+
+            <style>
+
+                .b
+                {
+                    margin: 0 auto;
+                    align-content: center;
+                    border-radius: 30px;
+                    border: 5px solid #666666;
+                    width: 400px;
+                    text-align: center;
+                }
+                .g
+                {
+                    margin: 0 auto;
+                    align-content: center;
+                    border-radius: 30px;
+                    border: 5px solid #666666;
+                    width: 400px;
+                    text-align: center;
+                }
+
+
+                label
+                {
+                    font-style: italic;
+
+                }
+            </style>
+           
+           <script>
+
+
+                function loadFile()
+                {
+                    var load = document.querySelector('img');
+                    var file = document.querySelector('input[type=file]').files[0];
+                    var reader = new FileReader();
+                    reader.onloadend = function () 
+                    {
+                        load.src = reader.result;
+                    }
+                    if (file) 
+                    {
+                        load.readAsDataURL(file);
+                    } 
+                    else 
+                    {
+                        load.src = "";
+                    }
+                }
+
+
+                $(document).ready(function()
+                {
+                    $.betetadagoen = function()
+                    {
+                        if (($("#eposta").val() == "" ) &&($("#gTestua").val() == "" )&&($("#eZuzena").val() == "" )&&($("#eOkerra1").val() == "" )
+                            &&($("#eOkerra2").val() == "" )&($("#eOkerra3").val(). == "" )&($("#gZail").val() == "" ) &($("#gArloa").val() == "" ))
+                        {
+                            return true;
+                        } 
+                        else 
+                        {
+                            return false;
+                        }
+                    }
+
+                    $.epostakonprobatu = function()
+                    {
+                        var balioa= $("#eposta").val();
+                        if (balioa.match((/^[a-zA-Z]{2,20}[0-9][0-9][0-9]@ikasle.ehu.eus/)))
+                        {
+                            return true;
+                        } 
+                        else 
+                        {
+                            return false;
+                        }
+                    }
+                    
+
+                    $('#galderenF').submit(function() 
+                     {
+                        if ($.betetadagoen()) 
+                        {
+                            if ($.epostakonprobatu()) 
+                            {
+                                if ($("#gTestua").val().length>=10)
+                                {
+                                    return true;
+                                } 
+                                else 
+                                {
+                                    alert("Galderak gutxienez 10 karakterekoa izan behar ditu");
+                                    return false;
+                                }         
+                            } 
+                            else
+                            {
+                                alert("Eposta elektronikoa okerra da");
+                                return false;
+                            }
+                        } else 
+                        {
+                            alert("Hutsuneak daude, datu guztiak bete behar dira");
+                            return false;
+                        }
+                    })
+                })
+
+           </script>  
+
+        </head>
+
+
+        <body>
+
+            <header class='main' id='h1'>
+                  <span class="right"><a href="/login">LogIn</a> </span><br>
+                  <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>  
+
+                <h2>QUESTIONS</h2>
+            </header>
+            <nav class='main' id='n1' role='navigation'>
+                <span><a href='layout.html'>Home</a></span>
+                <span><a href='/quizzes'>Quizzes</a></span>
+                <span><a href='credits.html'>Credits</a></span>
+				<span><a href='php/showQuestions.php'>Show Questions</a></span>
+            </nav>
+
+
+
+            <section class="main" id="s1">
+                <div>
+
+                    <form  id="galderenF" name="galderenF"  action="php/addQuestion.php" method="POST">
+
+                        <div class="b">
+                            <label>Bezeroaren informazioa:</label> <br>
+                            Posta elektronikoa(*):<input type="text" name="eposta" id="eposta"/>
+                        </div>
+                        <br/><br>
+
+                        <div class="g">
+                            <label>Galderaren informazioa:</label> <br>
+                            Galderaren testua(*):<input type="text" name="gTestua"  class="erantzuna" id="gTestua" height="2000px"/>
+                            <br/>
+
+                            <br>
+                            Erantzun zuzena(*):<input type="text" name="eZuzena" class="erantzuna" id="eZuzena" width="600px"/>
+                            <br/>
+
+                            <br>
+                            Erantzun okerra1(*):<input type="text" name="eOkerra1" class="erantzuna" id="eOkerra1" width="600px"/>
+                            <br/>
+
+                            <br>
+                            Erantzun okerra2(*):<input type="text" name="eOkerra2" class="erantzuna" id="eOkerra2" width="600px"/>
+                            <br/>
+
+                            <br>
+                            Erantzun okerra3(*):<input type="text" name="eOkerra3" class="erantzuna" id="eOkerra3" width="600px"/>
+                            <br/>
+
+                            <br>
+                            Galderaren zailtasuna(0-5)(*): 
+                            <select id="gZail" name="gZail">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <br>
+
+                            <br>
+                            Galderaren arloa(*):<input type="text" name="gArloa" id="gArloa"/>
+                            <br/><br>
+
+                            <div class="h">
+                            <label>Hautazkoa:</label> <br>
+                            Irudia:<input type="file" name="file-uploado" id="file-upload" accept="image/png, image/jpeg" onchange="loadFile();"/>
+                            </div>
+                            <br/>
+                        
+
+                        <br/><br/>
+                        <input id="botoia" type="submit" value="Bidali"/>
+                        <input type="reset" value="Borratu" id="reset"/><br><br>
+                        </div>
+                    </form>
+
+                        <img src="" id="irudia" height="200" width="200" style="display: none;">
+                
+    
+
+                <a href="layout.html">
+                <img src="images/atzera.png" align="middle" alt="" width="162" height="62" border="0"><br></a>
+    
+                <footer class='main' id='f1'>
+                    <a href='https://github.com/pruiz026/ws2018'>Link GITHUB</a>
+                </footer>
+            </div>
+
+            </section>
+
+        </body>
+</html>
