@@ -4,7 +4,7 @@
 	{
 		$server="localhost";
 		$user="id7209609_prlm96";
-		$passwd="prlm96";  
+		$passwd="";
 	 	$database="id7209609_quiz";  
 	} 
 	else 

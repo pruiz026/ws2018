@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 	<head>
         <meta name="eduki-mota" content="text/html;" http-equiv="content-type" charset="utf-8">
-        <title>showQuestions</title>
-        <link rel='stylesheet' type='text/css' href='styles/style.css' />
+        <title>Show Questions PHP</title>
+        <link rel='stylesheet' type='text/css' href='../styles/style.css' />
         <link rel='stylesheet' 
 	           type='text/css' 
 	           media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-	           href='styles/wide.css' />
+	           href='../styles/wide.css' />
         <link rel='stylesheet' 
                type='text/css' 
                media='only screen and (max-width: 480px)'
-               href='styles/smartphone.css' />
+               href='../styles/smartphone.css' />
    </head>		
 
 
@@ -38,30 +38,26 @@
 
 						$ema = $esteka->query($sql_Quiz);
 
-						echo '<table border=1><tr><th> ID </th><th> eposta </th><th> Galdera </th><th> Erantzun Zuzena </th><th> 
-						Erantzun Okerra 1 </th><th> Erantzun Okerra 2 </th><th> Erantzun Okerra 3 </th><th> Zailtasuna </th><th> Arloa </th></tr>';
+						echo '<table border=1><tr><th> eposta </th><th> Galdera </th><th> ErantzunaZuzena </th><th> 
+						ErantzunOkerra1 </th><th> ErantzunOkerra2 </th><th> ErantzunOkerra3 </th><th> Zailtasuna </th><th> Arloa </th></tr>';
 
 						if ($ema->num_rows > 0) 
 						{
 							while ($row = $ema->fetch_assoc()) 
 							{
-								echo '<tr><td>'.$row['ID'].'</td> <td>'. $row['eposta'].'</td><td>'.$row['Galdera'].'</td>
-								<td>'.$row['ErantzunZuzena'].'</td><td>'.$row['ErantzunOkerra1'].'</td><td>'.$row['ErantzunOkerra2'].'</td>
-								<td>'.$row['ErantzunOkerra3'].'</td><td>'.$row['GalderaZailtasuna'].'</td><td>'.$row['GalderaArloa'].'</td></tr>';
+								echo '<tr><td>'.$row['eposta'].'</td><td>'.$row['Galdera'].'</td>
+								<td>'.$row['ErantzunaZuzena'].'</td><td>'.$row['ErantzunOkerra1'].'</td><td>'.$row['ErantzunOkerra2'].'</td>
+								<td>'.$row['ErantzunOkerra3'].'</td><td>'.$row['Zailtasuna'].'</td><td>'.$row['Arloa'].'</td></tr>';
 							}
 						} 
 						else 
 						{
-							echo "Errorea: Ez dago galderarik";	
+							echo "Ez dago galderarik<br />";
 						}
 
 		
 						mysqli_close($esteka);
-						echo "Hasierako orrira itzultzeko: <a href='../layout.html'>Home</a>";
-						echo "Beste galdera bat egiteko: <a href='../addQuestion.html'>AddQuestion</a>";
-						echo "Datubaseko galderak ikusteko irudiekin: <a href='showQuestionsWithImage.php'>ShowQuestionsWithImage</a>";
-
-
+						echo "Hasierako orrira itzultzeko: <a href='../layout.html'>Home</a><br />";
 					?> 
 
 		<footer class='main' id='f1'>

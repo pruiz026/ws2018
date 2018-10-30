@@ -15,55 +15,18 @@
                    href='styles/smartphone.css' />
 
             <script src="js/jquery-3.2.1.js"></script>
-
-            <style>
-
-                .b
-                {
-                    margin: 0 auto;
-                    align-content: center;
-                    border-radius: 30px;
-                    border: 5px solid #666666;
-                    width: 400px;
-                    text-align: center;
-                }
-                .g
-                {
-                    margin: 0 auto;
-                    align-content: center;
-                    border-radius: 30px;
-                    border: 5px solid #666666;
-                    width: 400px;
-                    text-align: center;
-                }
-                .h
-                {
-                    margin: 0 auto;
-                    align-content: center;
-                    border-radius: 30px;
-                    border: 5px solid #666666;
-                    width: 400px;
-                    text-align: center;
-                }
-
-                label
-                {
-                    font-style: italic;
-
-                }
-            </style>
            
            <script>
 
 
-                function loadFile()
+                function previewFile()
                 {
-                    var load = document.querySelector('img');
+                    var preview = document.querySelector('img');
                     var file = document.querySelector('input[type=file]').files[0];
                     var reader = new FileReader();
                     reader.onloadend = function () 
                     {
-                        load.src = reader.result;
+                        preview.src = reader.result;
                     }
                     if (file) 
                     {
@@ -71,17 +34,23 @@
                     } 
                     else 
                     {
-                        load.src = "";
+                        preview.src = "";
                     }
+                    $("#igotakoirudia").show();
+
                 }
 
+                function ezabatuigotakoirudia() 
+                {
+                    $("#igotakoirudia").hide();
+                }
 
                 $(document).ready(function()
                 {
                     $.betetadagoen = function()
                     {
-                        if (($("#eposta").val() == "" ) &&($("#gTestua").val() == "" )&&($("#eZuzena").val() == "" )&&($("#eOkerra1").val() == "" )
-                            &&($("#eOkerra2").val() == "" )&($("#eOkerra3").val(). == "" )&($("#gZail").val() == "" ) &($("#gArloa").val() == "" ))
+                        if (($("#eposta").val().length>0) &&($("#gTestua").val().length>0 )&&($("#eZuzena").val().length>0 )&&($("#eOkerra1").val().length>0 )
+                            &&($("#eOkerra2").val().length>0 )&($("#eOkerra3").val().length>0 )&($("#gZail").val().length>0 ) &($("#gArloa").val().length>0))
                         {
                             return true;
                         } 
@@ -139,52 +108,35 @@
         </head>
 
 
-        <body>
-
-            <header class='main' id='h1'>
-                  <span class="right"><a href="/login">LogIn</a> </span><br>
-                  <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>  
-
-                <h2>QUESTIONS</h2>
-            </header>
+	<body>
+		<div id='page-wrap'>
+                <header class="main" id="h1">
+                    <h3>Quiz: crazy questions</h3>
+                    <h2>Add Questions</h2>
+                </header> 
             <nav class='main' id='n1' role='navigation'>
                 <span><a href='layout.html'>Home</a></span>
                 <span><a href='/quizzes'>Quizzes</a></span>
                 <span><a href='credits.html'>Credits</a></span>
             </nav>
 
-
-
-            <section class="main" id="s1">
-                <div>
-
-                    <form  id="galderenF" name="galderenF"  action="php/proba.php" method="post">
-                        <div class="b">
-                        <label>Bezeroaren informazioa:</label> <br>
-                        Posta elektronikoa(*):<input type="text" name="eposta" id="eposta"/></div>
-                        <br/><br>
-
-                        <div class="g">
-                        <label>Galderaren informazioa:</label> <br>
+            <section class="main" id="s1">                
+                    <form  id="galderenF" name="galderenF"  action="php/proba.php" method="post" enctype="multipart/form-data" >      
+						<label>Bezeroaren informazioa:</label>
+						<br>
+                        Posta elektronikoa(*):<input type="text" name="eposta" id="eposta"/>
+                        <br>
+                        <label>Galderaren informazioa:</label> 
+						<br>
                         Galderaren testua(*):<input type="text" name="gTestua"  class="erantzuna" id="gTestua" height="2000px"/>
-                        <br/>
-
                         <br>
                         Erantzun zuzena(*):<input type="text" name="eZuzena" class="erantzuna" id="eZuzena" width="600px"/>
-                        <br/>
-
                         <br>
                         Erantzun okerra1(*):<input type="text" name="eOkerra1" class="erantzuna" id="eOkerra1" width="600px"/>
-                        <br/>
-
                         <br>
                         Erantzun okerra2(*):<input type="text" name="eOkerra2" class="erantzuna" id="eOkerra2" width="600px"/>
-                        <br/>
-
                         <br>
                         Erantzun okerra3(*):<input type="text" name="eOkerra3" class="erantzuna" id="eOkerra3" width="600px"/>
-                        <br/>
-
                         <br>
                         Galderaren zailtasuna(0-5)(*): 
                         <select id="gZail" name="gZail">
@@ -196,38 +148,28 @@
                             <option value="5">5</option>
                         </select>
                         <br>
-
-        
-                        <br>
                         Galderaren arloa(*):<input type="text" name="gArloa" id="gArloa"/>
-                        <br/><br>
-
-                        <div class="h">
+			</section>
+						<nav class="main" id="n2">
+							<h4>IRUDIA</h4>
+							<img src="" id="igotakoirudia" height="200" width="200" style="display: none;">
+						</nav>						
+			<section class="main" id="s2">
                         <label>Hautazkoa:</label> <br>
-                        Irudia:<input type="file" name="file-uploado" id="file-upload" accept="image/png, image/jpeg" onchange="loadFile();">
+                        Irudia:<input type="file" name="irudia" id="irudia" accept="image/*" onchange="previewFile();">
                         <br/>
-                        
-
                         <br/><br/>
                         <input id="botoia" type="submit" value="Bidali"/>
-                        <input type="reset" value="Borratu" id="reset"/><br><br>
-
-                    </form>
-
-                        <img src="" id="irudia" height="200" width="200" style="display: none;">
-                </div>
-    
-
-                <a href="layout.html">
-                <img src="images/atzera.png" align="middle" alt="" width="162" height="62" border="0"><br></a>
-    
-                <footer class='main' id='f1'>
-                    <a href='https://github.com/pruiz026/ws2018'>Link GITHUB</a>
-                </footer>
-
-
-                
-            </section>
-
-        </body>
+                        <input type="reset" value="Borratu" id="reset" onclick = "ezabatuigotakoirudia();"/><br><br>
+					</form>
+			</section>					
+            <footer class='main' id='f1'>
+                <a href='https://github.com/pruiz026/ws2018'>Link GITHUB</a>
+				<br>
+				<br>
+				<a href="layout.html">
+				<img src="images/atzera.png" align="middle" alt="" width="162" height="62" border="0"><br></a>    
+            </footer>
+        </div>
+    </body>
 </html>
