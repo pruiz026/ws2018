@@ -1,37 +1,37 @@
-<?php 
-    $ePosta=$_GET["eposta"];
-?> 
-
+<?php
+     $ePosta=$_GET["eposta"];
+?>
 <!DOCTYPE HTML>
-<html>
-  <head>
+<hmtl>
+    <head> 
         <meta name="eduki-mota" content="text/html;" http-equiv="content-type" charset="utf-8">
-        <title>Add Question PHP</title>
+        <title>Add Question with Image PHP</title>
         <link rel='stylesheet' type='text/css' href='../styles/style.css' />
         <link rel='stylesheet' 
-	           type='text/css' 
-	           media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-	           href='../styles/wide.css' />
+               type='text/css' 
+               media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+               href='../styles/wide.css' />
         <link rel='stylesheet' 
                type='text/css' 
                media='only screen and (max-width: 480px)'
                href='../styles/smartphone.css' />
-    
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
         <style>
 
-            label
-            {
-                font-style: italic;
+        label
+        {
+            font-style: italic;
 
-            }
-    </style>
-   </head>
+        }
+        </style>   
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script src="js/jquery-3.2.1.js"></script>
+    
+    </head>
 
-   <body>	
-
-   		<script>
-   			function previewFile()
+    <body>
+        <script>
+            function previewFile()
             {
                 var preview = document.querySelector('img');
                 var file = document.querySelector('input[type=file]').files[0];
@@ -54,7 +54,7 @@
             function ezabatuigotakoirudia() 
             {
                 $("#igotakoirudia").hide();
-             }
+            }
 
 
             $(document).ready(function()
@@ -75,7 +75,7 @@
                 $.epostakonprobatu = function()
                 {
                     var balioa= $("#eposta").val();
-                    if (balioa.match((/^[a-zA-Z]{2,20}[0-9][0-9][0-9]@ikasle.ehu.eus/)))
+                    if (balioa.match((/^[a-zA-Z]{2,20}[0-9][0-9][0-9]@ikasle\.ehu\.eus$/)))
                     {
                         return true;
                     } 
@@ -115,69 +115,24 @@
                 })
             })
 
-        </script>  
+        </script>
+        <div id='page-wrap'>
+            <header class='main' id='h1'>
+                <h2>Add Question</h2>
+            </header>
 
 
+            <nav class='main' id='n1' role='navigation'>  
+                <span>Hasierarako orrira itzultzeko:<a href='layout.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>Home</a></span> 
+                <span>Datubaseko galderak ikusteko<a href='showQuestions.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>Show Question</a></span>
+                <span>Datubaseko galderak ikusteko irudiekin:<a href='showQuestionsWithImage.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>Show Question With Image</a></span>
+             </nav>
 
-		<div id='page-wrap'>
-			<header class='main' id='h1'>
-				<h2>Add Question</h2>
-			</header>
-
-
-            <nav class='main' id='n1' role='navigation'>
-            <?php 
-
-
-                include 'config.php';
-
-                if($_SERVER['REQUEST_METHOD']=='POST')
-                {
-                    $ePosta = ($_POST['eposta']);
-                    $eZuzena = ($_POST['eZuzena']);
-                    $gTestua = ($_POST['gTestua']);
-                    $eOkerra1 = ($_POST['eOkerra1']);
-                    $eOkerra2 = ($_POST['eOkerra2']);
-                    $eOkerra3 = ($_POST['eOkerra3']);
-                    $gZail = ($_POST['gZail']);
-                    $gArloa = ($_POST['gArloa']);
-
-                    $esteka = mysqli_connect($server, $user, $passwd, $database);
-                    if ($esteka->connect_error) 
-                    {
-                        die("Errorea konektatzerakoan: " . $esteka->connect_error);
-                    }
-
-                    $sq_Quizl = "INSERT INTO Questions (eposta, Galdera, ErantzunaZuzena, ErantzunOkerra1, ErantzunOkerra2, ErantzunOkerra3, Zailtasuna, Arloa)
-                    VALUES ('$ePosta', '$gTestua', '$eZuzena', '$eOkerra1', '$eOkerra2', '$eOkerra3', '$gZail', '$gArloa')";
-
-
-                    if (mysqli_query($esteka,$sql_Quiz))
-                    {
-                        echo ("Galdera berria gorde da!\n");
-                        echo ("<a href = showQuestions.php >Ikusi dauden galdera guztiak.</a><br />");  
-                    }
-                    else 
-                    {
-                        echo "Error: " . $sql . "<br>" . $esteka->error;
-                        echo ("<a href = ../addQuestion.html > Errorea, saiatu berriro hemen sakatuz.</a><br />");  
-                    }
-
-                    mysqli_close($esteka);
-
-                }
-
-
-            ?>
-            </nav>
-
-
-			<section class="main" id="s1">
+            <section class="main" id="s1">
                 <div>
-                    <form  id="galderenF" name="galderenF"  action="addQuestion.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>" method="post">
-                        <label>Bezeroaren informazioa:</label><br>
-                        <span>Posta elektronikoa(*):<input type="text" name="eposta" id="eposta" /></span><br/><br>
+                    <form  id="galderenF" name="galderenF"  action="addQuestionWithImage.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>" method="post" enctype="multipart/form-data">                        <label>Bezeroaren informazioa:</label><br>
 
+                        <span>Posta elektronikoa(*):<input type="text" name="eposta" id="eposta" value='<?php echo $ePosta;?>'/></span><br/><br>
                         <label>Galderaren informazioa:</label> <br>
                         <span>Galderaren testua(*):<input type="text" name="gTestua"  class="erantzuna" id="gTestua" height="2000px"/></span><br/><br>
                         <span>Erantzun zuzena(*):<input type="text" name="eZuzena" class="erantzuna" id="eZuzena" width="600px"/></span><br/><br>
@@ -194,27 +149,29 @@
                             <option value="5">5</option>
                         </select></span><br/><br>
                         <span>Galderaren arloa(*):<input type="text" name="gArloa" id="gArloa"/> </span>
-                        <br/><br>
-                        <label>Hautazkoa:</label> <br>
-                        Irudia:<input type="file" name="irudia" id="irudia" accept="image/*" onchange="previewFile();"/>
-                        <br/>
-                         <img src="" id="igotakoirudia" height="200" width="200" style="display: none;">
-                        <br/><br/>
-                        <input id="botoia" type="submit" value="Bidali"/>
-                        <input type="reset" value="Borratu" id="reset" onclick = "ezabatuigotakoirudia();"/><br><br>
+            </section>
+            <nav class="main" id="n1">
+                <h4>IRUDIA</h4>
+                <img src="" id="igotakoirudia" height="200" width="200" style="display: none;">
+            </nav>
+            <section class="main" id="s2">
+                <label>Hautazkoa:</label> <br>
+                Irudia:<input type="file" name="irudia" id="irudia" accept="image/*" onchange="previewFile();"/>                           
+                <br/>
+                <br/><br/>
+                <input id="botoia" type="submit" value="Bidali"/>
+                <input type="reset" value="Borratu" id="reset" onclick = "ezabatuigotakoirudia();"/><br><br>
+            </section>
                     </form>
-                </div>
-			
+            </div>
             <center>
                 <a href='layout.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>
                 <img src="../images/atzera.png" align="middle" alt="" width="162" height="62" border="0"><br></a>
-            </center> 
+               </center> 
             <footer class='main' id='f1'>
-				 <a href='https://github.com/pruiz026/ws2018' target="_blank">Link GITHUB</a> | 
-                 <a href='layout.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>Home</a>
-			</footer>
-            
-		</div>
-    </section>
-	</body>
+                 <a href='https://github.com/pruiz026/ws2018' target="_blank">Link GITHUB</a> | 
+                <a href='layout.php?eposta=<?php $ePosta=$_GET["eposta"]; echo $ePosta;?>'>Home</a></span> 
+            </footer>
+
+    </body>
 </html>

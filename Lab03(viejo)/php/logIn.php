@@ -125,7 +125,8 @@
                     if ($rows_cnt==1) 
                     {
                         $rows_cnt=0;
-                        header ('Location: layout.php?ePosta='.$ePosta.'');
+                        echo " Ongi etorri!, hemen sakatu hasierako orrira joateko";
+                        echo"<p><a href='layout.php?eposta=$ePosta'> Home </a>";                    
                     } 
                     else  
                     {

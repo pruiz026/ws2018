@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -131,7 +133,6 @@
 		</script>
 
 
-
 		<?php 
 
 			if (isset($_POST['pasahitza'])) 
@@ -148,7 +149,7 @@
 				{
 					echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 				}
-			
+
 				$ePosta = $_POST['eposta'];
 				$deitura = $_POST['deitura'];
 				$pasahitza = $_POST['pasahitza'];
@@ -176,11 +177,13 @@
 				{
 					phpAlert( "Posta elektroniko existitzen da, beste posta kontu bat sartu.");
 				} 
-				header ('Location: ../layout.html');
 
+				echo " Ongi etorri!, hemen sakatu hasierako orrira joateko";
+                echo"<p><a href='layout.html'> Home </a>";
 				mysqli_close($esteka);
 			}
 		?>
+		
 
 
 		<div id='page-wrap'>
@@ -197,16 +200,16 @@
 
             <section class="main" id="s1"><label>Bete formularioa:</label> 
 				<form  id="signUp" name="signUp"  action="" method="post" onsubmit="return egiaztatu(this)" enctype="multipart/form-data" >
-				   Posta elektronikoa(*): <input type="text" name="eposta" id="eposta" class="erantzuna" width="200"/>
+				   Posta elektronikoa(*): <input type="text" name="eposta" id="eposta" class="erantzuna" width="200" required pattern="^([a-z]{2,})([0-9]{3})@ikasle\.ehu\.eus$" value="xxxx000@ikasle.ehu.eus"/>
 				    <br/>
-				   Deitura(*): <input type="text" name="deitura"  class="erantzuna" id="deitura" height="2000px"/>
+				   Deitura(*): <input type="text" name="deitura"  class="erantzuna" id="deitura" height="2000px" required pattern="^([A-Z]{1}[a-z]+\s)([A-Z]{1}[a-z]+(\s)?)+$"/>
 				    <br/>
-				    Pasahitza(*): <input type="password" name="pasahitza" class="erantzuna" id="pasahitza" width="600px"/>
+				    Pasahitza(*): <input type="password" name="pasahitza" class="erantzuna" id="pasahitza" width="600px" required pattern="^.{8,}$"/>
 				    <br/>
-				    Pasahitza errepikatu(*): <input type="password" name="pasahitza2" class="erantzuna" id="pasahitza2" width="600px"/>
+				    Pasahitza errepikatu(*): <input type="password" name="pasahitza2" class="erantzuna" id="pasahitza2" width="600px" required pattern="^.{8,}$"/>
 					<br/><br/>
 		            <label>Hautazkoa:</label> <br>
-					<input type="file" name="irudiProfil" id="irudiProfil" onchange="previewFile()" >
+					<input type="file" name="irudiProfil" id="irudiProfil"  >
 				    <br/><br/>
 
 					<center>
