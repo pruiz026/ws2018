@@ -89,10 +89,8 @@
                             $itemBody = $itemBody->addChild('p', $gTestua);
                             $correctResponse = $assesmentItem->addChild('correctResponse',$eZuzena);
                             
-                            $xml->asXML ('../xml/questions.xml');
-                            echo "<script>zuzena('XML fitxategia zuzen eguneratu da')</script>";
+                            $xml->asXML('../xml/questions.xml');
 
-                            
                             echo nl2br ("Galdera berria gordeta!\n");
                             echo nl2br ("<a href = showQuestionsWithImage.php?eposta=$ePosta >Ikusi dauden galdera guztiak.</a>\n");
                             echo nl2br ("\n\n");

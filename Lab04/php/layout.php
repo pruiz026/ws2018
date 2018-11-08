@@ -32,7 +32,7 @@
 
  	<body onload = >
         <div id='page-wrap'>
-
+            <center>
                 <header class='main' id='h1'>
                     <span class="right" style="display:none;"><a href="logOut.php">LogOut</a> </span>
 
@@ -58,7 +58,7 @@
 
                   <h2>Quiz: crazy questions</h2>
                 </header>
-
+            </center>
             <nav class='main' id='n1' role='navigation'>
                 <span><a href='/quizzes'>Quizzes</a></span>
                 <?php
