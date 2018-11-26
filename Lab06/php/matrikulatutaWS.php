@@ -11,13 +11,11 @@
 	if ($emaitza == 'BAI')
 	{
 		echo "<script type='text/javascript'>document.getElementById('errregistratu').disabled = false;</script>";
-		echo "<span style='color:green'><b>BAI da</span>";
-
+		echo "<span style='color:green'><b>BAI</span>";
 	}
-	else if ($emaitza == 'EZ')
+	else
 	{
 		echo "<script type='text/javascript'>document.getElementById('errregistratu').disabled = true;</script>";
 		echo "<span style='color:red'>EZ</span>";
-
 	}	
 ?>

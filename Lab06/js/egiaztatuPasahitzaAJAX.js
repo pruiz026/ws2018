@@ -9,10 +9,9 @@ function egiaztatuPasahitza()
 		cache: false,
 		url: "../php/egiaztatuPasahitza.php",
 		data: $data,
-
-		success: function(data)
+		success: function(response)
 		{
-			$("#pasahitzaEgiaztatuta").fadeIn().html(data);
+			$("#pasahitzaEgiaztatuta").fadeIn().html(response);
 		}
 	})
 		

@@ -1,11 +1,11 @@
 <?php
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-	
+
 	require_once('lib/nusoap.php');
 	require_once('lib/class.wsdlcache.php');
 
 	//LOKALERAKO
-	$soapclient = new nusoap_client('http://127.0.0.1/ws18/Lab06/php//egiaztatuPasahitza.php?wsdl', true);
+	$soapclient = new nusoap_client('http://127.0.0.1//ws18/Lab06/php//egiaztatuPasahitza.php?wsdl', true);
 	//HODEIRAKO
 	//$soapclient = new nusoap_client('https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl', true);
 

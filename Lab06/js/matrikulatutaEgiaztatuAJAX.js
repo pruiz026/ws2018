@@ -8,11 +8,10 @@ function matrikulatutaEgiaztatu()
 		type: "POST",
 		cache: false,
 		url: "../php/matrikulatutaWS.php",
-        data: $data,
-
-		success: function(data)
+		data: $data,
+		success: function(response)
 		{
-			$("#matrikulatutaEgiaztatuta").fadeIn().html(data);
+			$("#matrikulatutaEgiaztatuta").fadeIn().html(response);
 		} 
 	}
 }

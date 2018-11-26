@@ -12,11 +12,15 @@
 			   type='text/css' 
 			   media='only screen and (max-width: 480px)'
 			   href='../styles/smartphone.css' />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
 
 
 		<script src="../js/jquery-3.2.1.js"></script>
 		<script src="../js/addImage.js"></script>
 		<script src="../js/removeImage.js"></script>
+
 		<script src="../js/egiaztatuPasahitzaAJAX.js"></script>
 		<script src="../js/matrikulatutaEgiaztatuAJAX.js"></script>
 
@@ -40,11 +44,11 @@
 			<section class="main" id="s1">
 				<div>				
 				<form id="formularioa" action="signUp.php" method="post" enctype="multipart/form-data">
-					Eposta (*): <input type="text" class="input" name="eposta" size="50" required pattern="^([a-z]{2,})([0-9]{3})@ikasle\.ehu\.eus$" value="xxxx000@ikasle.ehu.eus" onfocusout=="matrikulatutaEgiaztatu()"/> 
+					Eposta (*): <input type="text" class="input" name="eposta" size="50" required pattern="^([a-z]{2,})([0-9]{3})@ikasle\.ehu\.eus$" oninput=="matrikulatutaEgiaztatu()"/> 
 					<div id="matrikulatutaEgiaztatuta"></div>
 					<br><br>
 					Deitura (*): <input type="text" class="input" id="deitura" name="deitura" size="50" required pattern="^([A-Z]{1}[a-z]+\s)([A-Z]{1}[a-z]+(\s)?)+$"/> <br><br>
-					Pasahitza (*): <input type="password" class="input" id="pasahitza" name="pasahitza" size="50" required pattern="^.{8,}$" onfocusout=="egiaztatuPasahitza()"/> <br><br>
+					Pasahitza (*): <input type="password" class="input" id="pasahitza" name="pasahitza" size="50" required pattern="^.{8,}$" oninput=="egiaztatuPasahitza()"/> <br><br>
 					Pasahitza errepikatu (*): <input type="password" class="input" name="pasahitzaErrepikatu" size="50" required pattern="^.{8,}$"/> 
 					<div id="pasahitzaEgiaztatuta"></div>
 					<br><br>
@@ -71,12 +75,14 @@
 		$deitura = $galdera = preg_replace('/\s\s+/', ' ', trim($_POST['deitura']));
 		$pasahitza = $_POST['pasahitza'];
 		$pasahitzaErrepikatu = $_POST['pasahitzaErrepikatu'];
-		$argazkiTamaina = is_uploaded_file($_FILES['fitxategia']['size']);
-			if ($argazkiTamaina > 0)
+
+		$argazkiTamaina = $_FILES['fitxategia']['size'];
+			if($argazkiTamaina > 0) 
 			{
-				$argazkiIzena = $_FILES['fitxategia']['tmp_name'];
-				$argazkia = addslashes(file_get_contents($argazkiIzena));
-			} 
+				$argazkiIzena = $_FILES['fitxategia']['name'];
+				$argazkia = addslashes(file_get_contents($_FILES['fitxategia']['tmp_name']));
+			}
+		
 		
 		$erroreak = "";
 		if (empty($eposta)) $erroreak = $erroreak . "(*) Eposta zehaztu gabe dago\\n";

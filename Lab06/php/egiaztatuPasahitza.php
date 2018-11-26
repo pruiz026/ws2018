@@ -4,7 +4,7 @@
 	require_once('lib/class.wsdlcache.php');
 
 	//LOKALERAKO
-	$ns="http://127.0.0.1/ws18/Lab06/php/egiaztatuPasahitza.php?wsdl";	
+	$ns="http://127.0.0.1//ws18/Lab06/php/egiaztatuPasahitza.php?wsdl";	
 	//HODEIRAKO
 	//$ns="https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl";
 	
@@ -18,16 +18,13 @@
 	{		
 		if($y==1010)
 		{
-			$file = fopen("../toppasswords.txt","r");
-			while(!feof($file))
+			$file = fopen("toppasswords.txt","r") or die("Pasahitza ez da aurkitu.");
+			while(($pasahitza = fgets($file)) !== false)
 			{
-				$file1 = fgets($file);
-				if(trim($file1)==$x)
-				{
+				$pasahitza = preg_replace('/\n+/','',trim($pasahitza));
+				if(strcmp($x,$pasahitza)===0)
 					return "BALIOGABEA";
-				}
 			}
-			fclose($file);
 			return "BALIOZKOA";
 		}
 		else
@@ -36,6 +33,9 @@
 		}
 	}
 		
-	if ( !isset( $HTTP_RAW_POST_DATA ) ) $HTTP_RAW_POST_DATA =file_get_contents( 'php://input' );
+	if(!isset($HTTP_RAW_POST_DATA))
+	{
+		$HTTP_RAW_POST_DATA = file_get_contents('php://input');
+	}
 	$server->service($HTTP_RAW_POST_DATA);
 ?>
