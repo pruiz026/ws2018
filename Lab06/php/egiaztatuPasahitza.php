@@ -4,9 +4,9 @@
 	require_once('lib/class.wsdlcache.php');
 
 	//LOKALERAKO
-	$ns="http://127.0.0.1//ws18/Lab06/php/egiaztatuPasahitza.php?wsdl";	
+	//$ns="http://127.0.0.1//ws18/Lab06/php/egiaztatuPasahitza.php?wsdl";
 	//HODEIRAKO
-	//$ns="https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl";
+	$ns="https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl";
 	
 	$server = new soap_server;
 	$server->configureWSDL('egiaztatuP',$ns);
@@ -18,13 +18,13 @@
 	{		
 		if($y==1010)
 		{
-			$file = fopen("toppasswords.txt","r") or die("Pasahitza ez da aurkitu.");
-			while(($pasahitza = fgets($file)) !== false)
+			$file = fopen("toppasswords.txt", "r");
+			while ($linea = fscanf($file, "%s"))
 			{
-				$pasahitza = preg_replace('/\n+/','',trim($pasahitza));
-				if(strcmp($x,$pasahitza)===0)
+				if ($x == $linea[0]) 
 					return "BALIOGABEA";
 			}
+			fclose($file);
 			return "BALIOZKOA";
 		}
 		else
