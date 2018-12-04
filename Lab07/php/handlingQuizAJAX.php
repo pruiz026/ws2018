@@ -1,12 +1,4 @@
 <!DOCTYPE HTML>
-<?php 
-	session_start ();	
- 	if (!isset($_SESSION['Ikasle'])) 
- 	{
-    	header('location:../');
-    	exit(); 
-  	}
-?>
 <hmtl>
     <head> 
         <meta name="eduki-mota" content="text/html;" http-equiv="content-type" charset="utf-8">
