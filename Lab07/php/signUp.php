@@ -1,3 +1,11 @@
+<?php
+	header("Control-cache: no-store, no-cache, must-revalidate");
+	session_start();
+	if(isset($_SESSION['id'])) 
+	{
+		echo '<script> javascript:history.go(1); </script>';
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -124,16 +132,21 @@
 					$matrikulatutaWS = $soapclient1->call('egiaztatuE', array('x'=>$eposta));
 					
 					//LOKALERAKO
-					//$soapclient2 = new nusoap_client('http://127.0.0.1//ws18/Lab06/php//egiaztatuPasahitza.php?wsdl', true);
+					//$soapclient2 = new nusoap_client('http://127.0.0.1//ws18/Lab07/php/egiaztatuPasahitza.php?wsdl', true);
 					//HODEIRAKO
-					$soapclient2 = new nusoap_client('https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl', true);					
+					$soapclient2 = new nusoap_client('https://wspruiz026.000webhostapp.com/Lab07/php/egiaztatuPasahitza.php?wsdl', true);					
 					$pasahitzaWS = $soapclient2->call('egiaztatuP', array('x'=>$pasahitza, 'y'=>1010));
 					$erroreak = "";
 					
 					if($matrikulatutaWS == "BAI" && $pasahitzaWS == "BALIOZKOA") 
 					{
-						$linki->query("INSERT INTO users(blokeatuta, eposta, deitura, pasahitza, argazkia) VALUES ('0', $eposta', '$deitura', '$pasahitza', '$argazkia')");
-						echo "<script>location.href='layout.php?registered=1';</script>";
+						$newhash = password_hash($pasahitza, PASSWORD_BCRYPT);
+						$_SESSION['register'] = 1;
+
+						$linki->query("INSERT INTO users(eposta, deitura, pasahitza, argazkia) VALUES ('$eposta', '$deitura', '$newhash', '$argazkia')");
+						$linki = 0;
+
+						echo "<script>location.href='layout.php';</script>";
 						die();
 					}
 					else if($matrikulatutaWS == "EZ") 

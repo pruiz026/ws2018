@@ -1,3 +1,11 @@
+<?php
+	header("Control-cache: no-store, no-cache, must-revalidate");
+	session_start();
+	if(isset($_SESSION['id'])) 
+	{
+		echo '<script> javascript:history.go(1); </script>';
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,6 +20,8 @@
 			   type='text/css' 
 			   media='only screen and (max-width: 480px)'
 			   href='../styles/smartphone.css' />
+		<script src="../js/addImage.js"></script>
+		<script src="../js/removeImage.js"></script>
 		<script src="../js/jquery-3.2.1.js"></script>
 	</head>
 	<body>
@@ -38,6 +48,7 @@
 					<input type="submit" name="saioaHasi" value="   Saioa hasi   "/>
 					<input type="reset" name="garbitu" value="     Garbitu     "/>
 				</form>
+				<br><span><a href="berrezarriPasahitza.php">Pasahitza ahaztu duzu?</a> </span>
 				</div>
 				
 			</section>
@@ -64,35 +75,40 @@
 			$data = $linki->query("SELECT * FROM users WHERE eposta='".$eposta."'");		
 			if($data->num_rows != 0) 
 			{		
-				$user = $data->fetch_assoc();
-				if($pasahitza != $user['pasahitza']) echo '<script> alert("Pasahitza okerra"); </script>';
-				else 
+				if ($eposta == 'admin000@ehu.eus')
 				{
-					$egoera = $linki->query("SELECT blokeatuta FROM users WHERE eposta = '".$eposta."'");
-					$user = $egoera->fetch_assoc();
-					if( 0 != $user['blokeatuta']) echo '<script> alert("Blokeatuta zaude, ezin zara sartu."); </script>';
-					else
+					$id = $user['ID'];
+					$_SESSION['id'] = $id;
+					session_start();
+
+					$_SESSION['rola'] = "admin";
+					echo "<script> window.location.href='handlingAccounts.php'; </script>";
+				}
+				else
+				{
+					$user = $data->fetch_assoc();
+					$hash = $user['pasahitza'];
+
+					if (!password_verify($pasahitza, $hash)) 
 					{
-						if($eposta == "admin000@ehu.eus")
-						{	
-							$id = $user['ID'];
-							echo "<script>location.href='handlingAccounts.php?logged=$id';</script>";
-							session_start();
-							$_SESSION['Admin'] = $eposta;
-						}
+						echo '<script> alert("Pasahitza okerra"); </script>';
+					}
+					else
+					{		 
+						if( 0 != $user['blokeatuta']) echo '<script> alert("Blokeatuta zaude, ezin zara sartu."); </script>';
 						else
 						{
 							$id = $user['ID'];
-							echo "<script>location.href='handlingQuizAJAX.php?logged=$id';</script>";
+							$_SESSION['id'] = $id;
 							session_start();
-							$_SESSION['Ikasle'] = $eposta;
+							
+							$_SESSION['rola'] = "ikaslea";
+							echo "<script> window.location.href='handlingQuizAJAX.php?logged=$id'; </script>";
 						}
 					}
-
 				}
 			}
 			else echo '<script> alert("Erabiltzaile hori ez da existitzen"); </script>';
 		}
 	}
-?>
-
+?>

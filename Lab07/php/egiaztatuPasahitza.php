@@ -4,9 +4,9 @@
 	require_once('lib/class.wsdlcache.php');
 
     //LOKALERAKO
-    //$ns="http://127.0.0.1//ws18/Lab06/php/egiaztatuPasahitza.php?wsdl";
+    //$ns="http://127.0.0.1//ws18/Lab07/php/egiaztatuPasahitza.php?wsdl";
     //HODEIRAKO
-    $ns="https://wspruiz026.000webhostapp.com/Lab06/php/egiaztatuPasahitza.php?wsdl";
+    $ns="https://wspruiz026.000webhostapp.com/Lab07/php/egiaztatuPasahitza.php?wsdl";
 	
 	$server = new soap_server;
 	$server->configureWSDL('egiaztatuP',$ns);

@@ -1,5 +1,6 @@
+<?php session_start();?>
 <!DOCTYPE html>
-<?php session_start (); ?>
+
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
@@ -20,20 +21,20 @@
 	<header class='main' id='h1'>
 		<span class='logeatuGabeak'><a href="logIn.php">LogIn</a> </span>
 		<span class='logeatuGabeak'><a href="signUp.php">SignUp</a> </span>
-		<span class='logeatuak'><a href="layout.php">LogOut</a> </span>
+		<span class='logeatuak'><a href="logOut.php">LogOut</a> </span>
 		<a id="backButton" href=javascript:history.go(-1);> <img src="../images/atrás.png" width="40" height="40"></a>
 		<div id="logInfo"></div>
 		<h2>Credits</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "layout.php?logged=$id";} else {echo "layout.php";} ?>'>Home</a></span>
-		<span><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "layout.php?logged=$id";} else {echo "layout.php";} ?>'>Quizzes</a></span>
-		<span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showQuestions.php?logged=$id";} ?>'>Show questions</a></span>
-        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "../xml/questions.xml?logged=$id";} ?>'>XML Questions</a></span>
-        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showXMLQuestions.php?logged=$id";} ?>'>XML Questions (PHP)</a></span>
-        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "handlingQuizAJAX.php?logged=$id";} ?>'>Handling Quiz AJAX</a></span>
-
-
+		<span><a href='layout.php'>Home</a></span>
+		<span><a href='credits.php'>Credits</a></span>
+		<span><a href='layout.php'>Quizzes</a></span>
+		<span class='logeatuak'><a href='showQuestions.php'>Show Questions</a></span>
+		<span class='logeatuak'><a href='../xml/questions.xml.php'>XML Questions</a></span>
+		<span class='logeatuak'><a href='showXMLQuestions.php'>XML Questions(PHP)</a></span>
+		<span class='logeatuak'><a href='handlingQuizAJAX.php'>Handling Quiz AJAX</a></span>
+		<span class='logeatuak'><a href='handlingAccounts.php'>Handling accounts</a></span>
 	</nav>
     <section class="main" id="s1">
         <div>

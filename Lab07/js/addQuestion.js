@@ -29,20 +29,20 @@ $(document).ready(function()
 		if(erroreak !== "") alert(erroreak);
 		else 
 		{
-			var post_url = $("#formularioa").attr("action");
 			var request_method = $("#formularioa").attr("method");
 			var form_data = $("#formularioa").serialize();
 
 			$.ajax(
 			{
+				async: true,
 				type: request_method,
-				url: post_url,
+				url: "../php/addQuestion.php",
 				cache : false,
 				data:form_data,
 				success:function()
 				{
 					$("#AJAX").html("<br>Zure galdera datu basera gehitu da<br>");
-					galderakIkusi();
+					galderakIkusi(true);
 
 				}
 

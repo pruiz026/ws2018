@@ -1,3 +1,13 @@
+<?php
+	header("Control-cache: no-store, no-cache, must-revalidate");
+	session_start();
+	if(!isset($_SESSION['id'])) 
+	{
+		echo '<script> javascript:history.go(1); </script>';
+		die();
+	}
+?>
+
 <!DOCTYPE HTML>
 <hmtl>
     <head> 
@@ -18,6 +28,8 @@
 		<script src="../js/addImage.js"></script>
 		<script src="../js/removeImage.js"></script>		
 		<script src="../js/showQuestionsAJAX.js"></script>
+		<script src="../js/birkargatuTaula.js"></script>		
+
 		
     </head>
 
@@ -32,18 +44,18 @@
 			</header>
 
 			<nav class='main' id='n1' role='navigation'> 
-	       		<span><a href='<?php $id=$_GET['logged']; echo "layout.php?logged=$id"; ?>'>Home</a></span>
-				<span><a href='<?php $id=$_GET['logged']; echo "credits.php?logged=$id"; ?>'>Credits</a></span>
-				<span><a href='<?php $id=$_GET['logged']; echo "layout.php?logged=$id"; ?>'>Quizzes</a></span>
-				<span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showQuestions.php?logged=$id";} ?>'>Show questions</a></span>
-				<span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "../xml/questions.xml?logged=$id";} ?>'>XML Questions</a></span>
-		        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showXMLQuestions.php?logged=$id";} ?>'>XML Questions (PHP)</a></span>
+				<span><a href='layout.php'>Home</a></span>
+				<span><a href='credits.php'>Credits</a></span>
+				<span><a href='layout.php'>Quizzes</a></span>
+				<span class='logeatuak'><a href='showQuestions.php'>Show Questions</a></span>
+				<span class='logeatuak'><a href='../xml/questions.xml'>XML Questions</a></span>
+				<span class='logeatuak'><a href='showXMLQuestions.php'>XML Questions(PHP)</a></span>
 			</nav>
 
 			<section class="main" id="s1">
 				<div>
 				<form id="formularioa" name="formularioa" action="<?php echo "addQuestion.php?logged=$id"?>" method="post" enctype='multipart/form-data'>
-					Egilearen eposta (*): <input type="text" class="input" id="eposta" name="eposta" size="50"  value="" required pattern="^([a-z]{2,})([0-9]{3})@ikasle\.ehu\.eus$"/> </br></br>
+					Egilearen eposta (*): <input type="text" class="input" id="eposta" name="eposta" size="50"  value="<?php $eposta ?>" required pattern="^([a-z]{2,})([0-9]{3})@ikasle\.ehu\.eus$"/> </br></br>
 					Galderaren testua (*): <input type="text" class="input" id="galdera" name="galdera" size="110" required pattern="^.{10,}"/> </br></br>
 					Erantzun zuzena (*): <input type="text" class="input" id="erantzunZuzena" name="erantzunZuzena" size="110"/> </br></br>
 					Erantzun okerra1 (*): <input type="text" class="input" id="erantzunOkerra1" name="erantzunOkerra1" size="110"/> </br></br>
@@ -69,8 +81,10 @@
 				</div>
 			</section>
                 <center>
+
+                <div id="AJAXgalderak"></div>
 				<div id="AJAX"></div>
-				<div id="AJAXtaula" ></div>
+				<div id="AJAXtaula" style="background-color:#99FF66;"></div>
 				</center>
 			<footer class='main' id='f1'>
 				 <a href='https://github.com/pruiz026/ws2018' target="_blank">Link GITHUB</a> 			
@@ -78,7 +92,6 @@
 
 	</body>
 </html>
-
 <?php
 	include("userInfo.php");
 ?>

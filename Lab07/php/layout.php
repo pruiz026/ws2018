@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 
 <html id="layout">
@@ -26,14 +27,14 @@
 		<h2>Quiz: crazy questions</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "layout.php?logged=$id";} else {echo "layout.php";} ?>'>Home</a></span>
-        <span><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "credits.php?logged=$id";} else {echo "credits.php";} ?>'>Credits</a></span>
-		<span><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "layout.php?logged=$id";} else {echo "layout.php";} ?>'>Quizzes</a></span>
-		<span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showQuestions.php?logged=$id";} ?>'>Show questions</a></span>        
- 		<span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "../xml/questions.xml?logged=$id";} ?>'>XML Questions</a></span>
-        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "showXMLQuestions.php?logged=$id";} ?>'>XML Questions (PHP)</a></span>
-        <span class='logeatuak'><a href='<?php if (!empty($_GET['logged'])) {$id = $_GET['logged']; echo "handlingQuizAJAX.php?logged=$id";} ?>'>Handling Quiz AJAX</a></span>
-
+		<span><a href='layout.php'>Home</a></span>
+		<span><a href='credits.php'>Credits</a></span>
+		<span><a href='layout.php'>Quizzes</a></span>
+		<span class='logeatuak'><a href='handlingQuizAJAX.php'>Handling Quiz AJAX</a></span>
+		<span class='logeatuak'><a href='showQuestions.php'>Show Questions</a></span>
+		<span class='logeatuak'><a href='../xml/questions.xml.php'>XML Questions</a></span>
+		<span class='logeatuak'><a href='showXMLQuestions.php'>XML Questions(PHP)</a></span>
+		<span class='logeatuak'><a href='handlingAccounts.php'>Handling Accounts</a></span>
 
 	</nav>
     <section class="main" id="s1">
@@ -47,10 +48,13 @@
   </div>
 </body>
 </html>
-<?php 
-	include("userInfo.php");
+<?php
+	include("userInfo.php");		
+	if ($_SESSION['register'] == 1) 
+	{
+		echo '<script> $("#s1").find("div").text("Zure erregistratzea arazorik gabe gauzatu da, egin login saioa hasteko"); </script>';
 		
-	if (!empty($_GET['registered']))
-		echo '<script> $("#s1").find("div").text("Zure erregistratzea arazorik gabe gauzatu da, egin login saioa hasteko"); </script>'; 
-?>
-
+		session_unset();
+		session_destroy();
+	}
+?>
