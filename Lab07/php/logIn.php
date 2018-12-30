@@ -75,7 +75,7 @@
 			$data = $linki->query("SELECT * FROM users WHERE eposta='".$eposta."'");		
 			if($data->num_rows != 0) 
 			{		
-				if ($eposta == 'admin000@ehu.eus')
+				if ($eposta == 'rosa.arruabarrena@ehu.eus')
 				{
 					$id = $user['ID'];
 					$_SESSION['id'] = $id;
